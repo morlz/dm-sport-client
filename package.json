@@ -1,0 +1,38 @@
+{
+  "name": "dm-sport-client",
+  "version": "1.0.0",
+  "description": "Управление по делам молодежи, физической культуры и спорта Дмитровского района Московской области",
+  "productName": "Управление по делам молодежи, физической культуры и спорта Дмитровского района Московской области",
+  "cordovaId": "com.morlz.pew.dm-sport",
+  "author": "morlz <morlz@mail.ru>",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "deploy:emptyDist": "node deploy/emptyDist",
+    "deploy:start": "node deploy/start",
+    "build": "npm run deploy:emptyDist && quasar build && npm run deploy:start"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "browser-es6-map": "^1.0.1",
+    "browser-event-emitter": "^1.0.2",
+    "lodash.isequal": "^4.5.0",
+    "lodash.merge": "^4.6.1",
+    "moment": "^2.22.1"
+  },
+  "devDependencies": {
+    "fs-extra": "^6.0.1",
+    "ftp-deploy": "^2.1.0",
+    "quasar-cli": "^0.15.14",
+    "sftp-sync-deploy": "^0.7.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}
