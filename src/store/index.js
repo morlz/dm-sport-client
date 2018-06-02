@@ -7,6 +7,7 @@ import page from './page'
 import politics from './politics'
 import sport from './sport'
 import video from './video'
+import anounce from './anounce'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
 		page,
 		politics,
 		sport,
-		video
+		video,
+		anounce
 	},
 	namespaced: true
 })

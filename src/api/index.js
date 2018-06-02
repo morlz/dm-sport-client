@@ -3,7 +3,8 @@ import EventEmitter from 'browser-event-emitter'
 import path from 'path'
 
 const protocol = 'http'
-const domain = 'api.dm-sport.pew-pc.com/'
+//const domain = 'api.dm-sport.pew-pc.com/'
+const domain = 'localhost/dm-sport-server/public/'
 
 class ApiCore extends EventEmitter {
 	async invoke (to, options = {}, method = 'get', i = 0) {
@@ -78,6 +79,18 @@ class ApiCore extends EventEmitter {
 
 	_wait (time = 300) {
 		return new Promise(resolve => setTimeout(resolve, time))
+	}
+
+	sortFnFactory (field, revert = false) {
+		return (a, b) => {
+			if (typeof field == 'function') {
+				if (field(a) > field(b)) return revert ? 1 : -1
+				if (field(a) < field(b)) return revert ? -1 : 1
+			}
+			if (a[field] > b[field]) return revert ? 1 : -1
+			if (a[field] < b[field]) return revert ? -1 : 1
+			return 0
+		}
 	}
 }
 

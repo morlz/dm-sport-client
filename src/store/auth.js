@@ -9,7 +9,7 @@ const state = {
 const actions = {
 	async signin ({ commit, dispatch, state }) {
 		let res = await User.signin({ login: state.login, pass: state.pass })
-		if (!res) return
+		if (!res || !res.id) return
 
 		commit('userSet', res)
 		router.push('/')
@@ -30,7 +30,11 @@ const mutations = {
 		if (payload.api_token) localStorage.setItem('api_token', payload.api_token)
 		if (payload.id) localStorage.setItem('uid', payload.id)
 	},
-	signout: state => state.user = null
+	signout: state => {
+		state.user = null
+		localStorage.removeItem('api_token')
+		localStorage.removeItem('uid')
+	}
 }
 
 const getters = {

@@ -1,6 +1,6 @@
 <template>
 <q-page padding class="AuthPage">
-	<q-card class="AuthPageForm">
+	<q-card class="AuthPageForm" v-if="!logined">
 		<q-card-title>
 			Вход
 		</q-card-title>
@@ -19,14 +19,27 @@
 			<q-btn flat color="primary" @click="$store.dispatch('auth/signin')">Войти</q-btn>
 		</q-card-actions>
 	</q-card>
+
+	<q-card class="AuthPageForm" v-else>
+		<q-card-title>
+			{{ $store.state.auth.user.login }}
+		</q-card-title>
+
+		<q-card-actions>
+			<q-btn flat color="primary" @click="$store.commit('auth/signout')">Выйти</q-btn>
+		</q-card-actions>
+	</q-card>
 </q-page>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
 	computed: {
+		...mapGetters('auth', [
+			'logined'
+		]),
 		login: {
 			get () {
 				return this.$store.state.auth.login

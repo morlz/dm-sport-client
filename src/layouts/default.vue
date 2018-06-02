@@ -1,5 +1,5 @@
 <template>
-<q-layout view="lHh Lpr lFf" @scroll="scroll">
+<q-layout view="lHh LpR lFf" @scroll="scroll">
 	<q-layout-header>
 		<div class="HeaderContainer">
 			<div class="Header" :class="{ 'Header__big': !top }">
@@ -23,6 +23,8 @@
 		</div>
 	</q-layout-header>
 
+	<anounce-drawer :big="!top"/>
+
 	<q-page-container :style="{ paddingTop: '150px' }">
 		<router-view :key="$route.fullPath"/>
 	</q-page-container>
@@ -36,13 +38,15 @@ import {
 } from 'quasar'
 import AppMenu from '@/components/AppMenu'
 import AppSocial from '@/components/AppSocial'
+import AnounceDrawer from '@/components/AnounceDrawer'
 
 export default {
 	name: 'LayoutDefault',
 	components: {
 		AppMenu,
 		AppSocial,
-		QSlideTransition
+		QSlideTransition,
+		AnounceDrawer
 	},
 	data() {
 		return {
