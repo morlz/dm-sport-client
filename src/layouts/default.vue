@@ -1,31 +1,11 @@
 <template>
-<q-layout view="lHh LpR lFf" @scroll="scroll">
-	<q-layout-header>
-		<div class="HeaderContainer">
-			<div class="Header" :class="{ 'Header__big': !top }">
-				<img src="statics/logo.png" class="Header__logo" @click="$router.push('/')"/>
+<q-layout view="lHh LpR lFf" @scroll="scroll" @resize="resize">
+	<app-header :top="top"/>
 
-				<div>
-					<div class="Header__textWrapper" :style="{ height: !top ? '80px' : '0' }">
-						<div class="Header__text">
-							Управление по делам молодежи, физической культуры и спорта <br>
-							администрации Дмитровского муниципального района Московской области
-						</div>
-					</div>
+	<menu-drawer v-if="mobile"/>
+	<anounce-drawer :big="!top && !mobile"/>
 
-					<div class="Header__bottom">
-						<app-menu/>
-
-						<app-social/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</q-layout-header>
-
-	<anounce-drawer :big="!top"/>
-
-	<q-page-container :style="{ paddingTop: '150px' }">
+	<q-page-container :style="{ paddingTop: mobile ? '50px' : '150px' }">
 		<router-view :key="$route.fullPath"/>
 	</q-page-container>
 </q-layout>
@@ -36,27 +16,37 @@ import {
 	openURL,
 	QSlideTransition
 } from 'quasar'
-import AppMenu from '@/components/AppMenu'
-import AppSocial from '@/components/AppSocial'
+
 import AnounceDrawer from '@/components/AnounceDrawer'
+import MenuDrawer from '@/components/MenuDrawer'
+import AppHeader from '@/components/AppHeader'
+import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
 	name: 'LayoutDefault',
 	components: {
-		AppMenu,
-		AppSocial,
+		AppHeader,
 		QSlideTransition,
-		AnounceDrawer
+		AnounceDrawer,
+		MenuDrawer
 	},
 	data() {
 		return {
 			top: 0
 		}
 	},
+	computed: {
+		...mapState('menu', [
+			'mobile'
+		])
+	},
 	methods: {
 		openURL,
 		scroll (e) {
 			this.top = e.position
+		},
+		resize ({ width }) {
+			this.$store.commit('menu/mobileSet', width < 1000)
 		}
 	},
 	created () {
@@ -66,48 +56,5 @@ export default {
 </script>
 
 <style lang="stylus">
-.HeaderContainer
-	height 50px
 
-.Header
-	padding 0 10px
-	display grid
-	grid-template-columns max-content 1fr max-content
-	align-items center
-	background #390668
-	transition all .3s ease-in-out
-	height 70px
-	box-shadow 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px rgba(0,0,0,0.14), 0 1px 10px rgba(0,0,0,0.12)
-
-	&__logo
-		margin 5px
-		height 60px
-		width 60px
-		cursor pointer
-		transition all .3s ease-in-out
-
-	&__big
-		height 150px
-
-		.Header__logo
-			height 140px
-			width 140px
-
-	&__text
-		color white
-		padding 20px
-		opacity 0.65
-		text-align left
-		margin 0 5px
-
-	&__textWrapper
-		overflow hidden
-		transition all .3s ease-in-out
-
-	&__bottom
-		display grid
-		grid-gap 10px
-		grid-template-columns 1fr max-content
-		justify-content space-between
-		margin 0 1px
 </style>

@@ -1,7 +1,14 @@
 <template>
 <q-card v-ripple class="VideoCard" @click.native="clickHandler">
-	<q-card-media @click.native.stop>
-		<iframe class="VideoCard__frame" :src="content.url" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
+	<q-card-media
+		@click.native.stop
+		class="VideoCard__container">
+		<iframe
+			class="VideoCard__frame"
+			:src="content.url"
+			frameborder="0"
+			allow="autoplay; encrypted-media"
+			allowfullscreen/>
 	</q-card-media>
 
 	<q-card-title>
@@ -41,16 +48,28 @@ export default {
 
 <style lang="stylus">
 .VideoCard
-	width 400px
+	width 100%
 	position relative
 	cursor pointer
 	user-select none
 	display grid
 	align-items start
 
-	&__frame
-		width 400px
-		height 300px
+	&__container
+		position relative
+		padding-bottom 56.25%
+		padding-top 30px
+		height 0
+		overflow hidden
+
+		iframe
+		object
+		embed
+			position absolute
+			top 0
+			left 0
+			width 100%
+			height 100%
 
 	&__actions
 		align-self end

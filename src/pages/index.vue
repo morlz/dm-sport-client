@@ -1,17 +1,34 @@
 <template>
-<q-page padding class="PageNews">
+<q-page class="PageNews" :padding="!mobile">
 	<q-scroll-observable @scroll="scroll"/>
 
-	<h1>Молодёжная политика</h1>
+	<q-tabs v-model="currentTab" inverted v-if="mobile">
+		<q-tab slot="title" name="politics" label="Молодёжная политика" default/>
+		<q-tab slot="title" name="sport" label="Физическая культура и спорт"/>
+	</q-tabs>
 
-	<h1>Физическая культура и спорт</h1>
+	<div class="PageNews__mobile" v-if="mobile">
+		<div class="NewsList" ref="politics" v-if="currentTab == 'politics'">
+			<new-card v-for="item, index in politics" :key="index" :content="item" />
+		</div>
 
-	<div class="NewsList" ref="politics">
-		<new-card v-for="item, index in politics" :key="index" :content="item" />
+		<div class="NewsList" ref="sport" v-if="currentTab == 'sport'">
+			<new-card v-for="item, index in sport" :key="index" :content="item" />
+		</div>
 	</div>
 
-	<div class="NewsList" ref="sport">
-		<new-card v-for="item, index in sport" :key="index" :content="item" />
+	<div class="PageNews__grid" v-else>
+		<h1>Молодёжная политика</h1>
+
+		<h1>Физическая культура и спорт</h1>
+
+		<div class="NewsList" ref="politics">
+			<new-card v-for="item, index in politics" :key="index" :content="item" />
+		</div>
+
+		<div class="NewsList" ref="sport">
+			<new-card v-for="item, index in sport" :key="index" :content="item" />
+		</div>
 	</div>
 
 	<q-page-sticky position="bottom-right" :offset="[18, 18]" v-if="$store.getters['auth/logined']">
@@ -38,6 +55,7 @@ export default {
 	},
 	data () {
 		return {
+			currentTab: '',
 			loading: {
 				sport: false,
 				politics: false
@@ -53,6 +71,9 @@ export default {
 			sport: state => state.cached,
 			sport_complete: state => state.complete
 		}),
+		...mapState('menu', [
+			'mobile'
+		])
 	},
 	methods: {
 		scroll (e) {
@@ -92,11 +113,15 @@ export default {
 
 <style lang="stylus">
 .PageNews
-	margin 0 auto
-	display grid
-	grid-gap 20px
-	grid-template-columns 1fr 1fr
-	grid-template-rows max-content 1fr
+	&__grid
+		margin 0 auto
+		display grid
+		grid-gap 20px
+		grid-template-columns 1fr 1fr
+		grid-template-rows max-content 1fr
+
+	&__mobile
+		padding 10px
 
 .NewsList
 	display grid

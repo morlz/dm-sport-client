@@ -2,7 +2,8 @@ import { Anounce } from '@/lib'
 import api from '@/api'
 
 const state = {
-	cached: []
+	cached: [],
+	drawerOpen: true
 }
 
 const actions = {
@@ -28,11 +29,15 @@ const actions = {
 const mutations = {
 	cachedSet: (state, payload) => state.cached = payload,
 	cachedAppend: (state, payload) => state.cached.push(payload),
-	cachedRemove: (state, payload) => state.cached = state.cached.filter(el => el.id != payload.id)
+	cachedRemove: (state, payload) => state.cached = state.cached.filter(el => el.id != payload.id),
+	drawerOpenSet: (state, payload) => state.drawerOpen = payload,
+	drawerToggle: state => state.drawerOpen = !state.drawerOpen
 }
 
 const getters = {
-	anounces: state => state.cached.sort( api.sortFnFactory(item => new Date(item.date).valueOf(), true) )
+	anounces: state => state.cached.sort( api.sortFnFactory(item => new Date(item.date).valueOf(), true) ),
+	drawerOpen: (state, gettters, rootState, rootGetters) =>
+		(getters.anounces.length || rootGetters['auth/logined']) && state.drawerOpen
 }
 
 export default {

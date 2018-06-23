@@ -3,6 +3,7 @@ export default [
 		path: '/',
 		component: () => import ('layouts/default'),
 		children: [
+			{ path: 'news', redirect: '/' },
 			{ path: '', component: () => import ('pages/index') },
 			{ path: 'contacts', component: () => import ('pages/Page'), props: { id: 4 } },
 			{ path: 'history', component: () => import ('pages/Page'), props: { id: 1 } },

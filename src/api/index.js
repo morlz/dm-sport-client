@@ -3,8 +3,8 @@ import EventEmitter from 'browser-event-emitter'
 import path from 'path'
 
 const protocol = 'http'
-//const domain = 'api.dm-sport.pew-pc.com/'
-const domain = 'localhost/dm-sport-server/public/'
+const domain = 'api.dm-sport.pew-pc.com/'
+//const domain = 'localhost/dm-sport-server/public/'
 
 class ApiCore extends EventEmitter {
 	async invoke (to, options = {}, method = 'get', i = 0) {

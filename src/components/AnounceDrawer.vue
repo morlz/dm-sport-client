@@ -1,5 +1,5 @@
 <template>
-	<q-layout-drawer side="right" :value="!!anounces.length || logined">
+	<q-layout-drawer side="right" v-model="open">
 		<q-scroll-area class="DrawerScroll" :style="{ height: '100%' }" :class="{ 'DrawerScrollBig': big }">
 			<q-list separator no-border>
 				<q-list-header>
@@ -64,11 +64,20 @@ export default {
 	},
 	computed: {
 		...mapGetters('anounce', [
-			'anounces'
+			'anounces',
+			'drawerOpen'
 		]),
 		...mapGetters('auth', [
 			'logined'
-		])
+		]),
+		open: {
+			get () {
+				return this.drawerOpen
+			},
+			set (n) {
+				this.$store.commit('anounce/drawerOpenSet', n)
+			}
+		}
 	},
 	methods: {
 		add () {

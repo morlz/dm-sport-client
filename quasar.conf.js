@@ -7,7 +7,8 @@ module.exports = function(ctx) {
 		// app plugins (/src/plugins)
 		plugins: [
 			'axios',
-			'moment'
+			'moment',
+			'AddressbarColor'
 		],
 		css: [
 			'app.styl'
@@ -26,7 +27,7 @@ module.exports = function(ctx) {
 		},
 		build: {
 			scopeHoisting: true,
-			vueRouterMode: 'history',
+			vueRouterMode: 'hash',
 			// gzip: true,
 			// analyze: true,
 			// extractCSS: false,
@@ -40,12 +41,14 @@ module.exports = function(ctx) {
 			// https: true,
 			// port: 8080,
 			open: true, // opens browser window automatically
+			/*
 			proxy: {
 				'/public': {
 					target: 'http://localhost/dm-sport-server',
 					changeOrigin: true
 				}
 			}
+			*/
 		},
 		// framework: 'all' --- includes everything; for dev only!
 		framework: {
@@ -77,7 +80,10 @@ module.exports = function(ctx) {
 				'QPageSticky',
 				'QEditor',
 				'QScrollArea',
-				'QDatetime'
+				'QDatetime',
+				'QTabs',
+				'QTab',
+				'QTabPane'
 			],
 			directives: [
 				'Ripple'

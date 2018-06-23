@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "fs-extra": "^6.0.1",
-    "ftp-deploy": "^2.1.0",
+    "ftp-deploy": "^2.1.1",
     "quasar-cli": "^0.15.14",
     "sftp-sync-deploy": "^0.7.1"
   },

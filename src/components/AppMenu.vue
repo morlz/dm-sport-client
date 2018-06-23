@@ -28,11 +28,15 @@ export default {
 	height 70px
 	display grid
 	grid-auto-flow column
-	align-items center
 	justify-content start
+	grid-gap 10px
+	align-items center
 	padding 0 20px
-	grid-gap 20px
+	box-sizing border-box
 	&__item
+		min-width max-content
+		padding 5px
+		text-align center
 		text-transform uppercase
 		opacity .8
 		transition all .2s ease-in-out
