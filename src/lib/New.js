@@ -1,5 +1,6 @@
 import BaseModel from '@/lib/BaseModel'
 import api from '@/api'
+import moment from 'moment'
 
 
 export default class New extends BaseModel {
@@ -10,6 +11,7 @@ export default class New extends BaseModel {
 			content: '',
 			image: '',
 			video: '',
+			created_at: moment().format('YYYY-MM-DD hh:mm:ss'),
 			...arg
 		})
 	}

@@ -3,6 +3,7 @@ import New from './New'
 import Page from './Page'
 import Video from './Video'
 import Anounce from './Anounce'
+import Doc from './Doc'
 
 export default {}
 export {
@@ -10,5 +11,6 @@ export {
 	New,
 	Page,
 	Video,
-	Anounce
+	Anounce,
+	Doc
 }

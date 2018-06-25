@@ -91,6 +91,21 @@ export default class BaseModel {
 	}
 
 	clone () {
-		return Object.assign( Object.create( Object.getPrototypeOf(this)), this )
+		return new this.constructor(Object.getOwnPropertyNames(this).reduce((prev, el) => (prev[el] = this[el], prev), {}))
+	}
+
+	get href () {
+		if (!this.baseUrl) return
+		return this.constructor.format(this.baseUrl, this)
+	}
+
+	static format (template, data) {
+		if (typeof template !== 'string')
+			throw new Error('template mus be an instance of String')
+
+		if (typeof data !== 'object' || data === null)
+			throw new Error('data must be an Object with keys is template marks and values is String')
+
+		return template.replace(/{(\w+)}/g, (m, p) => data[p])
 	}
 }

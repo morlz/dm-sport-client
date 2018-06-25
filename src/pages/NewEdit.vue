@@ -15,6 +15,10 @@
 		<q-input v-model="editFields.title" float-label="Название"/>
 	</q-field>
 
+	<q-field>
+		<q-datetime v-model="date" float-label="Дата создания" type="datetime"/>
+	</q-field>
+
 	<q-field helper="Ссылка на изображение">
 		<q-input v-model="editFields.image" float-label="Изображение"/>
 	</q-field>
@@ -62,6 +66,14 @@ export default {
 				if (!this.page) return
 				this.editFields = this.page.clone()
 				return this.page
+			}
+		},
+		date: {
+			get () {
+				return this.editFields.created_at
+			},
+			set (n) {
+				this.editFields.created_at = this.$moment(n).format('YYYY-MM-DD hh:mm:ss')
 			}
 		}
 	},

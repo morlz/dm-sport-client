@@ -5,6 +5,9 @@ export default [
 		children: [
 			{ path: 'news', redirect: '/' },
 			{ path: '', component: () => import ('pages/index') },
+			{ path: 'docs', component: () => import ('pages/DocList') },
+			{ path: 'doc/create', component: () => import ('pages/DocEdit'), props: { create: true } },
+			{ path: 'docs/:id', component: () => import ('pages/Doc') },
 			{ path: 'contacts', component: () => import ('pages/Page'), props: { id: 4 } },
 			{ path: 'history', component: () => import ('pages/Page'), props: { id: 1 } },
 			{ path: 'partner', component: () => import ('pages/Page'), props: { id: 2 } },

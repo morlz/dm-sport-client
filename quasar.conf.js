@@ -83,7 +83,7 @@ module.exports = function(ctx) {
 				'QDatetime',
 				'QTabs',
 				'QTab',
-				'QTabPane'
+				'QTabPane',
 			],
 			directives: [
 				'Ripple'
